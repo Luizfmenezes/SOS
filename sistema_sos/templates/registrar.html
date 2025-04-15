@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar SOS{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Registrar Novo SOS</h2>
+
+<form method="POST">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="numero_sos" class="form-label">Número do SOS</label>
+            <input type="text" class="form-control" id="numero_sos" name="numero_sos" required>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="linha" class="form-label">Linha/Rota</label>
+            <input type="text" class="form-control" id="linha" name="linha" required>
+        </div>
+        
+        <div class="col-12">
+            <label for="problema" class="form-label">Problema</label>
+            <select class="form-select" id="problema" name="problema" required>
+                <option value="">Selecione...</option>
+                <option value="Carro fraco">Carro fraco</option>
+                <option value="Não arranca">Não arranca</option>
+                <option value="Vazamento">Vazamento</option>
+                <option value="Problema elétrico">Problema elétrico</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="motorista_nome" class="form-label">Motorista (Nome)</label>
+            <input type="text" class="form-control" id="motorista_nome" name="motorista_nome" required>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="motorista_id" class="form-label">Matrícula</label>
+            <input type="text" class="form-control" id="motorista_id" name="motorista_id" required>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" required>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="os" class="form-label">Número da OS</label>
+            <input type="text" class="form-control" id="os" name="os" required>
+        </div>
+        
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Registrar SOS</button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock %}

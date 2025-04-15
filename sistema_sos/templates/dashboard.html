@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Painel de Controle{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Painel de Controle SOS</h2>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Resumo</h5>
+                <p>SOS Pendentes: <span class="badge bg-danger">{{ total_pendentes }}</span></p>
+                <p>SOS Resolvidos: <span class="badge bg-success">{{ total_resolvidos }}</span></p>
+                <a href="{{ url_for('registrar') }}" class="btn btn-primary me-2">Novo SOS</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Sair</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mb-3">SOS Ativos</h3>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>N° SOS</th>
+                <th>Linha</th>
+                <th>Problema</th>
+                <th>Motorista</th>
+                <th>Tempo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sos in pendentes %}
+            <tr class="{% if sos in alertas %}table-warning{% endif %}">
+                <td>{{ sos['numero_sos'] }}</td>
+                <td>{{ sos['linha'] }}</td>
+                <td>{{ sos['problema'] }}</td>
+                <td>{{ sos['motorista_nome'] }} ({{ sos['motorista_id'] }})</td>
+                <td>
+                    {% set tempo = datetime.now() - datetime.strptime(sos['data_hora'], '%Y-%m-%d %H:%M:%S') %}
+                    {{ tempo }}
+                </td>
+                <td>
+                    <a href="{{ url_for('resolver', sos_id=sos['id']) }}" 
+                       class="btn btn-sm btn-success">Resolver</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Nenhum SOS pendente</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
