@@ -2,3 +2,4 @@ flask
 flask-login
 twilio
 python-dotenv
+gunicorn
